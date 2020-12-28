@@ -3,9 +3,13 @@ Leetcode Question 20. Valid Parentheses
 https://leetcode.com/problems/valid-parentheses/
 */
 
+//The basic idea plzz read the infix to postfix conversion application from stack
+//then this question is a piece of cake for you
+
 class Solution
 {
 public:
+    //O(n)
     bool isValid(string s)
     {
 

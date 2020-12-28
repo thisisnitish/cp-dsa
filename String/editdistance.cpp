@@ -6,6 +6,7 @@ https://leetcode.com/problems/edit-distance/
 class Solution
 {
 public:
+    //O(n^2)
     int minDistance(string word1, string word2)
     {
         int m = word1.length(), n = word2.length();

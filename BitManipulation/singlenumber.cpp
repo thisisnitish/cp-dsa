@@ -10,6 +10,7 @@ public:
     {
         
         //Solution 1
+        //O(n)
         map<int, int> mp;
         for(int i=0; i<nums.size(); i++){
             mp[nums[i]]++;
@@ -23,6 +24,7 @@ public:
         
 
         //Solution 2
+        //O(n)
         int xorsum = 0;
         for (int i = 0; i < nums.size(); i++)
         {

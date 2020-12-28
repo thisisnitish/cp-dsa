@@ -1,5 +1,9 @@
 // CPP program for permutations of a string
 /*
+input
+ABC
+
+output
 All possbile permutations
 ABC
 ACB
@@ -21,6 +25,7 @@ void permutation(string s, string ans){
         return;
     }
 
+    //take every character from the string and apply recursion on the rest of the string
     for (int i = 0; i < s.length(); i++){
         char ch = s[i];
         string ros = s.substr(0, i) + s.substr(i+1);   //rest of string

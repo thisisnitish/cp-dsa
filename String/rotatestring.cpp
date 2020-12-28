@@ -17,6 +17,9 @@ public:
             return true;
 
         //Solution 1
+        //O(n)
+        //compare the A till it is equal to the B and add character 
+        //to the last and simultaneously delete from the front
         int i=alength;
         while(A != B){
             A += A[0];
@@ -27,6 +30,7 @@ public:
         return 1;
 
         //Solution 2
+        //basically add the string A with A then find B as a substring
         A = A + A;
         if (A.find(B) != string::npos)
             return 1;

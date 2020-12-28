@@ -6,6 +6,7 @@ https://leetcode.com/problems/subsets/
 class Solution
 {
 public:
+    //O(n^2)
     vector<vector<int>> subsets(vector<int> &nums)
     {
         vector<vector<int>> result;
