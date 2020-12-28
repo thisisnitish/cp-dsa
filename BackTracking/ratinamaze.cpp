@@ -31,6 +31,7 @@ bool isSafe(int** arr, int x, int y, int n){
 
 bool ratInMaze(int** arr, int x, int y, int n, int** solArr){
 
+    //this is our base case i.e. the position should be less than n
     if(x == n-1 && y == n-1){
         solArr[x][y] = 1;
         return true;
@@ -38,13 +39,20 @@ bool ratInMaze(int** arr, int x, int y, int n, int** solArr){
 
     if(isSafe(arr, x, y, n)){
         solArr[x][y] = 1;
-
+        
+        //rat going to the forward direction
         if(ratInMaze(arr, x+1, y, n, solArr)){
             return true;
         }
+
+        /*if rat fails in forward direction then 
+        move to the downward direction*/
         if(ratInMaze(arr, x, y+1, n, solArr)){
             return true;
         }
+
+        /*if none of the avobe solutions work then reset 
+        the solution and backtrack to the original position*/
         solArr[x][y] = 0;     //reset the solution i.e. backtracking
         return false;
     }
