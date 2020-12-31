@@ -82,12 +82,14 @@ public:
         /*base condition where we have put the 
         n queens to thier respective position*/
         if (x >= board.size())
-        {
-            print(board);
+        { 
+            /*this is specific to the questions which is asked, 
+            but for generic case we have to change the print function a bit*/
+            print(board);     
             return true;
         }
 
-        /*now we will the function recursively but 
+        /*now we will call the function recursively but 
         before we will check for a position whether 
         it is safe or not*/
 
