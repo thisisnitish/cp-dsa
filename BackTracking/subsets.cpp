@@ -3,6 +3,8 @@ Leetcode Question 78. Subsets
 https://leetcode.com/problems/subsets/
 */
 
+//Solution 1
+//Backtracking Recursion
 class Solution
 {
 public:
@@ -37,21 +39,6 @@ public:
 
     vector<vector<int>> subsets(vector<int> &nums)
     {
-
-        //Solution 1 - Bit Manipulation
-        vector<vector<int>> result;
-        for(int i=0; i< (1<<nums.size()); i++){   // 1<<nums.size() => 2^nums.size();
-            vector<int> temp;
-            for(int j=0; j<nums.size(); j++){   //this loop for positions for a number
-                if(i & (1 << j)){    // check a bit is set or unset
-                    temp.push_back(nums[j]);
-                }
-            }
-            result.push_back(temp);
-            temp.clear();
-        }
-
-        //Solution 2 - BackTracking(Recursion)
         //Time- O(N*2^N)
         if (nums.empty())
             return {{}};
@@ -62,3 +49,30 @@ public:
         return result;
     }
 };
+
+//Solution 2
+//Bit Manipulation
+
+class Solution
+{
+public:
+    vector<vector<int>> subsets(vector<int> &nums)
+    {
+
+        vector<vector<int>> result;
+        for (int i = 0; i < (1 << nums.size()); i++)
+        { // 1<<nums.size() => 2^nums.size();
+            vector<int> temp;
+            for (int j = 0; j < nums.size(); j++)
+            { //this loop for positions for a number
+                if (i & (1 << j))
+                { // check a bit is set or unset
+                    temp.push_back(nums[j]);
+                }
+            }
+            result.push_back(temp);
+            temp.clear();
+        }
+        return result;
+    }
+}
