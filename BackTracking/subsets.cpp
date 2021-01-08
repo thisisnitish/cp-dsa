@@ -23,7 +23,7 @@ public:
         {
             //here we are calling for next index
             subsets_rec(nums, idx + 1, result);
-            /*if you are trying recursion then you use 
+            /*if you are trying iteration then you use 
             one loop for elements one by one and then 
             copy the entire below part in that loop and
             replace nums[idx] with nums element*/
