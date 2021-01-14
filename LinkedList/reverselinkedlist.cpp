@@ -4,6 +4,7 @@ https://leetcode.com/problems/reverse-linked-list/
 */
 
 //Iterative
+//Time O(N), Space O(1)
 class Solution
 {
 public:
@@ -25,7 +26,9 @@ public:
 };
 
 //Recursive
-class Solution {
+//Time O(N), Space O(N)
+class Solution 
+{
 public:
     ListNode* reverseList(ListNode* head) {
         if(head == NULL || head->next == NULL) return head;
