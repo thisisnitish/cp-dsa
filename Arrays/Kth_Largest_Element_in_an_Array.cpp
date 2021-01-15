@@ -2,19 +2,26 @@
 Leetcode Question 215. Kth Largest Element in an Array
 https://leetcode.com/problems/kth-largest-element-in-an-array/
 */
-
+//Solution 1
 class Solution
 {
 public:
     int findKthLargest(vector<int> &nums, int k)
     {
 
-        //Solution 1
+        
         sort(nums.begin(), nums.end());
         return nums[nums.size() - k];
+    }
+};
 
-
-        //Solution 2
+//Solution 2
+class Solution
+{
+public:
+    int findKthLargest(vector<int> &nums, int k)
+    {
+        
         priority_queue<int> pq;
 
         for (int i = 0; i < nums.size(); i++)

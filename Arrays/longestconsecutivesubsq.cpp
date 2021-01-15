@@ -57,3 +57,35 @@ public:
         return maxsubs;
     }
 };
+
+//Solution 2
+//Time: O(n), Space: O(n)
+class Solution
+{
+public:
+    int longestConsecutive(vector<int> &nums)
+    {
+        // we can use set also in place of unordered_set, I've tried and it worked
+        unordered_set<int> arr;
+
+        for (auto x : nums)
+            arr.emplace(x);
+
+        int maxsubs = 0;
+
+        for (auto item : arr){
+            if (!arr.count(item - 1)){
+                int currentnum = item;
+                int currsubs = 1;
+
+                while (arr.count(currentnum + 1)){
+                    currentnum += 1;
+                    currsubs += 1;
+                }
+
+                maxsubs = max(maxsubs, currsubs);
+            }
+        }
+        return maxsubs;
+    }
+};

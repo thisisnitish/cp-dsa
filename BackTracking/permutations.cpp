@@ -6,7 +6,6 @@ https://leetcode.com/problems/permutations/
 class Solution
 {
 public:
-    vector<vector<int>> ans;
     vector<vector<int>> permute(vector<int> &nums)
     {
         /*Solution 1
@@ -36,10 +35,22 @@ public:
             }
         }
         return result;
+    }
+};
 
-        //Solution 2
-        /*here the basic idea is to swap the values one by one
-        and store it*/
+
+//Solution 2
+class Solution
+{
+public:
+    /*here the basic idea is to swap the values one by one
+    and store it*/
+    vector<vector<int>> ans;
+    vector<vector<int>> permute(vector<int> &nums)
+    {
+        if (nums.size() <= 1)
+            return {nums};
+
         permutations(nums, 0);
         return ans;
     }

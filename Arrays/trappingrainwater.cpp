@@ -3,14 +3,14 @@ Leetcode Question 42. Trapping Rain Water
 https://leetcode.com/problems/trapping-rain-water/
 */
 
+//Todo: Do with stack approach, dynamic programming also
+//Solution 1
+//Time: O(n2), Space: O(1)
 class Solution
 {
 public:
     int trap(vector<int> &height)
     {
-        //Todo: Do with stack approach, dynamic programming also
-        //Solution 1
-        //Time: O(n2), Space: O(1)
         int collectwater = 0;
         for(int i=1; i<height.size(); i++){
             int left_max = 0, right_max = 0;
@@ -26,8 +26,16 @@ public:
             collectwater += min(left_max, right_max) - height[i];
         }
         return collectwater;
+    }
+};
 
-        //Solution 2
+
+//Solution 2
+class Solution
+{
+public:
+    int trap(vector<int> &height)
+    {
         int left = 0, right = height.size() - 1;
         int left_max = 0, right_max = 0;
         int result = 0;
