@@ -61,3 +61,31 @@ public:
         return true;
     }
 };
+
+class Solution
+{
+public:
+    /*the basic idea is take two pointers
+    first move one position & second move two position
+    but at a time both will point to the same node then 
+    return true else return false*/
+    bool hasCycle(ListNode *head)
+    {
+        if (head == NULL)
+            return false;
+
+        ListNode *hare, *tortoise;
+        tortoise = head;
+        hare = head;
+
+        while (hare && hare->next)
+        {
+            tortoise = tortoise->next;
+            hare = hare->next->next;
+
+            if (hare == tortoise)
+                return true;
+        }
+        return false;
+    }
+};
