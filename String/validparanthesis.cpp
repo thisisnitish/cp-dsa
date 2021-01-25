@@ -9,7 +9,7 @@ https://leetcode.com/problems/valid-parentheses/
 class Solution
 {
 public:
-    //O(n)
+    /*Time: O(N), Space: O(N)*/
     bool isValid(string s)
     {
 
