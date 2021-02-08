@@ -14,6 +14,7 @@ https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-tr
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+//Solution 1
 class Solution
 {
 public:
@@ -49,5 +50,44 @@ public:
             mp[inorder[i]] = i;
 
         return buildTreeUtil(preorder, 0, n - 1, inorder, 0, n - 1);
+    }
+};
+
+//Solution 2
+class Solution
+{
+public:
+    /*this is a simpler approach, basic idea is find the root node
+    in preorder after that get the left and right subtree from the
+    inorder after setting the boundary and repeat this process 
+    repeatedly. Time: O(N), Space: O(N)*/
+    unordered_map<int, int> mp;
+    TreeNode *buildTreeUtil(vector<int> &preorder, int start, int end, int &pIndex)
+    {
+        if (start > end)
+            return NULL;
+
+        TreeNode *root = new TreeNode(preorder[pIndex++]);
+        /*get the root node index in sequence inorder to 
+        determine the left and right subtree boundary*/
+        int index = mp[root->val];
+
+        // recursively construct the left subtree
+        root->left = buildTreeUtil(preorder, start, index - 1, pIndex);
+        // recursively construct the right subtree
+        root->right = buildTreeUtil(preorder, index + 1, end, pIndex);
+        return root;
+    }
+    TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
+    {
+        if (inorder.size() == 0)
+            return nullptr;
+
+        int n = inorder.size();
+        for (int i = 0; i < n; i++)
+            mp[inorder[i]] = i;
+
+        int pIndex = 0;
+        return buildTreeUtil(preorder, 0, n - 1, pIndex);
     }
 };
