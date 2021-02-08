@@ -57,3 +57,47 @@ public:
         return buildTreeUtil(inorder, 0, n - 1, postorder, 0, n - 1);
     }
 };
+
+//Solution 2
+class Solution
+{
+public:
+    /*this is simpler approach, the basic idea is postorder last value
+    is the root node after that use inorder to find the index, in order to
+    set the boundary, and recursively repeat this process, make sure you first
+    right subtree and left subtree in this case other wise you run into overflow
+    error. Time: O(N), Space: O(N)*/
+    unordered_map<int, int> mp;
+    TreeNode *buildTreeUtil(vector<int> &postorder, int start, int end, int &pIndex)
+    {
+        if (start > end)
+            return NULL;
+
+        TreeNode *root = new TreeNode(postorder[pIndex--]);
+
+        /*search the current node index in inorder sequence to determine
+        the boundary of the left and right subtree of the current node*/
+        int index = mp[root->val];
+
+        // recursively construct the right subtree
+        root->right = buildTreeUtil(postorder, index + 1, end, pIndex);
+        // recursively construct the left subtree
+        root->left = buildTreeUtil(postorder, start, index - 1, pIndex);
+        return root;
+    }
+
+    TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
+    {
+        if (inorder.size() == 0)
+            return nullptr;
+
+        int n = inorder.size();
+
+        /*here we are filling the values of inorder 
+        inorder to perform search*/
+        for (int i = 0; i < n; i++)
+            mp[inorder[i]] = i;
+        int pIndex = n - 1;
+        return buildTreeUtil(postorder, 0, n - 1, pIndex);
+    }
+};
