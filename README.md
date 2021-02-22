@@ -2,7 +2,7 @@
 
 * A list of questions for competitive coding, data strucutres and also for interview prep.
 
-* This repo specifically focuses on grasping the concept of data structures and algorithms so that data structures becomes easy and programming becomes fun.
+* This repo specifically focuses on grasping the concept of data structures and algorithms so that it becomes easy and programming becomes fun.
 
 ### Topics Covered
 * Arrays
