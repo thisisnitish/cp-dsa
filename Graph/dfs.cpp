@@ -1,4 +1,4 @@
-/*CPP code for Iterative Depth First Search*/
+/*CPP code for Depth First Search*/
 /*
 Time: O(V+E)
 */
