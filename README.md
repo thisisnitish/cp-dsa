@@ -67,3 +67,21 @@
     * [Subsets](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/subsets.cpp)
     * [Subsets II](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/subsetsii.cpp)
     * [Word Break II](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/wordbreakii.cpp)
+
+## Binary Search Trees
+* ### Questions
+    * [Binary Tree to BST](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/binarytreetobst.cpp)    
+    * [Brothers From Different Roots](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/brothersfromdifferentroots.cpp)    
+    * [Construct Binary Search Tree from Preorder Traversal](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/constructbinarysearchtreefrompreordertraversal.cpp)   
+    * [Convert Sorted Array to Binary Search Tree](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/convertsortedarraytobinarysearchtree.cpp)   
+    * [Count BST nodes that lie in a given range](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/countbstnodethatlieinagivenrange.cpp)   
+    * [Delete Node in a BST](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/deletenodeinabst.cpp)   
+    * [Kth Smallest Element in a BST](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/kthsmallestelementinabst.cpp)   
+    * [Leaf at same level](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/leafatsamelevel.cpp)   
+    * [Lowest Common Ancestor of a Binary Search Tree](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/lowestcommonancestorofabinarysearchtree.cpp)   
+    * [Lowest Common Ancestor of a Binary Tree](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/lowestcommonancestorofabinarytree.cpp)   
+    * [Populating Next Right Pointers in Each Node](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/populatingnextrightpointerineachnode.cpp)   
+    * [Preorder to Postorder](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/preordertopostorder.cpp)   
+    * [Range Sum of BST](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/rangesumofbst.cpp)   
+    * [Search in a Binary Search Tree](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/searchinabinarytree.cpp)   
+    * [Validate Binary Search Tree](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/validatebinarysearchtree.cpp)   
