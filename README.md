@@ -53,3 +53,17 @@
     * [Trapping Rain Water](https://github.com/thisisnitish/cp-dsa/blob/main/Arrays/trappingrainwater.cpp)
     * [Two Sum](https://github.com/thisisnitish/cp-dsa/blob/main/Arrays/twosum.cpp)
     * [Unique Paths](https://github.com/thisisnitish/cp-dsa/blob/main/Arrays/uniquepaths.cpp)
+
+## BackTracking
+* ### Questions
+    * [Combinations](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/combinations.cpp)
+    * [Combination Sum](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/combinationsum.cpp)
+    * [Combination Sum II](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/combinationsumii.cpp)
+    * [Knight's Tour Problem](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/knightstourproblem.cpp)
+    * [N-Queens](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/nqueens.cpp)
+    * [Palindrome Partitioning](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/palindromepartitioning.cpp)
+    * [Permutations](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/permutations.cpp)
+    * [Rat In a Maze Problem](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/ratinamaze.cpp)
+    * [Subsets](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/subsets.cpp)
+    * [Subsets II](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/subsetsii.cpp)
+    * [Word Break II](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/wordbreakii.cpp)
