@@ -108,3 +108,12 @@
     * [Merge Two Binary Trees](https://github.com/thisisnitish/cp-dsa/blob/main/BinaryTrees/mergetwobinarytrees.cpp)
     * [Path Sum](https://github.com/thisisnitish/cp-dsa/blob/main/BinaryTrees/pathsum.cpp)
     * [Symmetric Tree](https://github.com/thisisnitish/cp-dsa/blob/main/BinaryTrees/symmetrictree.cpp)
+
+## Bit Manipulation
+* ### Questions
+    * [Number of 1 Bits](https://github.com/thisisnitish/cp-dsa/blob/main/BitManipulation/numberof1bits.cpp)
+    * [Power of Two](https://github.com/thisisnitish/cp-dsa/blob/main/BitManipulation/powerof2.cpp)
+    * [Reverse Bits](https://github.com/thisisnitish/cp-dsa/blob/main/BitManipulation/reversebits.cpp)
+    * [Single Number](https://github.com/thisisnitish/cp-dsa/blob/main/BitManipulation/singlenumber.cpp)
+    * [Single Number II](https://github.com/thisisnitish/cp-dsa/blob/main/BitManipulation/singlenumberii.cpp)
+    * [Single Number III](https://github.com/thisisnitish/cp-dsa/blob/main/BitManipulation/singlenumberiii.cpp)
