@@ -2,6 +2,7 @@
 The basic idea is to relax the edges V-1 times to find the shortest path and
 again relax every edges, if there exist the shortest path then it is sure that there
 exist a negative cycle in the graph, otherwise display the shortest path
+Time: O(V*E)
 Input:
 Enter the number of vertices: 5
 Enter the number of edges: 8
