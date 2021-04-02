@@ -36,7 +36,7 @@ public:
     Graph(int V);
     void addEdge(int v, int w);
     void DFSUtil(int v, vector<bool>& visited);
-    void printSingleConnectedComponent();
+    void printStronglyConnectedComponent();
     void fillOrder(int v, vector<bool>& visited, stack<int>& Stack);
     Graph getTranspose();
 };
@@ -85,7 +85,7 @@ void Graph::fillOrder(int v, vector<bool>& visited, stack<int>& Stack){
     Stack.push(v);
 }
 
-void Graph::printSingleConnectedComponent(){
+void Graph::printStronglyConnectedComponent(){
     stack<int> Stack;
 
     vector<bool> visited(V, false);
@@ -124,6 +124,6 @@ int main(){
         graph.addEdge(v, w);
     }
     cout<<"\nStrongly Connected Components are:\n";
-    graph.printSingleConnectedComponent();
+    graph.printStronglyConnectedComponent();
     return (0);
 }
