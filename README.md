@@ -141,3 +141,13 @@
     * [Reverse Nodes in k-Group](https://github.com/thisisnitish/cp-dsa/blob/main/LinkedList/reversenodesinkgroup.cpp)
     * [Sort List](https://github.com/thisisnitish/cp-dsa/blob/main/LinkedList/sortList.cpp)
     * [Swap Nodes in Pairs](https://github.com/thisisnitish/cp-dsa/blob/main/LinkedList/swapnodesinpairs.cpp)
+
+## Matrix
+* ### Questions
+    * [Kth Smallest Element in a Sorted Matrix](https://github.com/thisisnitish/cp-dsa/blob/main/Matrix/kthsmallestelementinasortedmatrix.cpp)
+    * [Largest Rectangle in Histogram](https://github.com/thisisnitish/cp-dsa/blob/main/Matrix/largestrectangleinhistogram.cpp)
+    * [Rotate Image](https://github.com/thisisnitish/cp-dsa/blob/main/Matrix/rotateimage.cpp)
+    * [Search a 2D Matrix](https://github.com/thisisnitish/cp-dsa/blob/main/Matrix/searcha2dmatrix.cpp)
+    * [Search a 2D Matrix II](https://github.com/thisisnitish/cp-dsa/blob/main/Matrix/searcha2dmatrixii.cpp)
+    * [Spiral Matrix](https://github.com/thisisnitish/cp-dsa/blob/main/Matrix/spiralmatrix.cpp)
+    
