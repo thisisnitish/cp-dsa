@@ -1,4 +1,7 @@
 /*CPP code for 0/1 Knapsack Problem
+Given weights and values of n items, put these items in a knapsack of 
+capacity W to get the maximum total value in the knapsack. You cannot
+break an item because this is a 0/1 knapsack problem not the fractional one
 
 Input:
 Enter the number of weights and values you want: 3
@@ -113,4 +116,63 @@ int main(){
     int maxProfit = knapsack(values, weights, n, W);
     cout<<"Maximum Profit is: "<<maxProfit<<"\n";
     return(0);
+}
+
+//Top-Down Approach
+//Time: O(n*W), Space: O(n*W)
+#include<iostream>
+#include<vector>
+using namespace std;
+
+
+int knapsack(vector<int>& values, vector<int>& weights, int n, int W){
+    vector<vector<int> > dp(n+1, vector<int> (W+1));
+
+    //initializing the matrix
+    for(int i=0; i<n+1; i++){
+        for(int j=0; j<W+1; j++){
+            if(i == 0 || j == 0)
+                dp[i][j] = 0;
+        }
+    }
+
+    //filling the values of subproblem
+    for(int i=1; i<n+1; i++){
+        for(int j=1; j<W+1; j++){
+            if(weights[i-1] <= j){
+                dp[i][j] = max(values[i-1] + dp[i-1][j-weights[i-1]], dp[i-1][j]);
+            }
+            else{
+                dp[i][j] = dp[i-1][j];
+            }
+        }
+    }
+    //returning the actual problem values
+    return dp[n][W];
+}
+
+int main(){
+    int n, W;
+    cout << "\nEnter the number of weights and values you want: ";
+    cin>>n;
+    cout << "\nEnter the capacity of the bag: ";
+    cin>>W;
+
+    vector<int> values, weights;
+    cout << "\nEnter the weights:\n";
+    for (int i = 0; i < n; i++){
+        int x;
+        cin >> x;
+        weights.push_back(x);
+    }
+    cout << "\nEnter the values:\n";
+    for (int i = 0; i < n; i++){
+        int x;
+        cin >> x;
+        values.push_back(x);
+    }
+
+    int maxProfit = knapsack(values, weights, n, W);
+    cout << "Maximum Profit is: " << maxProfit << "\n";
+    return (0);
 }
