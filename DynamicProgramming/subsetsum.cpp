@@ -1,8 +1,8 @@
 /*CPP code for Subset Sum problem
 Given a set of non-negative integers, and a value sum, determine if there 
-is a subset of the given set with sum equal to given sum. We have used Top Down Approach for implementation
-The basic idea is we can do this with the 0/1 knapsack top down code with some modification
-If you look at the code of kanpsack implementation with top dowm approach the code is similar
+is a subset of the given set with sum equal to given sum. We have used Bottom Up Approach for implementation
+The basic idea is we can do this with the 0/1 knapsack bottom up code with some modification
+If you look at the code of kanpsack implementation with bottom up approach the code is similar
 and if you already understood the 0/1 knapsack problem then this question is easy for you
 Input:
 Enter the size of the array: 5

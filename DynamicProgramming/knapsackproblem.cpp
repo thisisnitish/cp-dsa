@@ -64,7 +64,7 @@ int main(){
 }
 
 
-//Memoization
+//Memoization - Top-Down
 //Time: O(N*W), Space: O(N*W)
 #include<iostream>
 #include<vector>
@@ -118,7 +118,7 @@ int main(){
     return(0);
 }
 
-//Top-Down Approach
+//Bottom-Up Approach
 //Time: O(n*W), Space: O(n*W)
 #include<iostream>
 #include<vector>
