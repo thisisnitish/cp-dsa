@@ -6,6 +6,7 @@ https://leetcode.com/problems/two-sum/
 class Solution
 {
 public:
+    //Time: O(n), Space: O(n)
     vector<int> twoSum(vector<int> &nums, int target)
     {
 
