@@ -71,6 +71,11 @@
     * [Subsets II](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/subsetsii.cpp)
     * [Word Break II](https://github.com/thisisnitish/cp-dsa/blob/main/BackTracking/wordbreakii.cpp)
 
+## Binary Search
+* ### Questions
+    * [Find Minimum in Rotated Sorted Array](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearch/findminimuminrotatedsortedarray.cpp)
+    * [Search in Rotated Sorted Array](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearch/searchinrotatedsortedarray.cpp)
+
 ## Binary Search Trees
 * ### Questions
     * [Binary Tree to BST](https://github.com/thisisnitish/cp-dsa/blob/main/BinarySearchTrees/binarytreetobst.cpp)    
