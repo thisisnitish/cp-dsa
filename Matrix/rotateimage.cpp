@@ -7,7 +7,7 @@ class Solution
 {
 public:
     /*the basic idea is to take transpose of
-    a matrix and reverse the rows. Time: O(N)*/
+    a matrix and reverse the rows. Time: O(N^2), Space: O(1)*/
     void rotate(vector<vector<int> > &matrix)
     {
         if (matrix.empty())
