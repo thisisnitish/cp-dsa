@@ -195,3 +195,8 @@
     * [Search a 2D Matrix II](https://github.com/thisisnitish/cp-dsa/blob/main/Matrix/searcha2dmatrixii.cpp)
     * [Spiral Matrix](https://github.com/thisisnitish/cp-dsa/blob/main/Matrix/spiralmatrix.cpp)
     
+
+## Contributing
+Everyone is welcome to contribute. We gladly accept patches, pull requests, bug reports or any other improvements. Read below to see how you can get started.
+
+### In progess... we are working on this
