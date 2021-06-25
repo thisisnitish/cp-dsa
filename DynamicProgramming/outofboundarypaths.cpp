@@ -72,3 +72,42 @@ public:
         return memo[moves][x][y] = result % mod;
     }
 };
+
+//Memoization, using map
+class Solution
+{
+public:
+    int mod = 1e9 + 7;
+    unordered_map<string, int> memo;
+    int findPaths(int m, int n, int maxMove, int startRow, int startColumn)
+    {
+        return helper(m, n, maxMove, startRow, startColumn);
+    }
+
+    int helper(int m, int n, int moves, int x, int y)
+    {
+        //if goes of out of bounds
+        if (x >= m || y >= n || x < 0 || y < 0)
+            return 1;
+
+        //if the number of moves becomes 0
+        if (!moves)
+            return 0;
+
+        string key = to_string(x) + "-" + to_string(y) + "-" + to_string(moves);
+
+        if (memo.find(key) != memo.end())
+            return memo[key];
+
+        vector<vector<int> > dir = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+        int result = 0;
+        for (auto d : dir)
+        {
+            result += helper(m, n, moves - 1, x + d[0], y + d[1]);
+            result %= mod;
+        }
+
+        return memo[key] = result;
+    }
+};
