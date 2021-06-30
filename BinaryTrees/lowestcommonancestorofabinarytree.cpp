@@ -17,7 +17,7 @@ class Solution
 public:
     /*the basic idea is to go for each node and check if its 
     value is p or q, and then pass left and right subtree recursively.
-    Time: O(N), Space: O(N), Todo: Try Recursive approach*/
+    Time: O(N), Space: O(N)*/
     TreeNode *result = NULL;
     TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
     {
@@ -46,5 +46,39 @@ public:
             result = currentNode;
 
         return (mid + left + right > 0);
+    }
+};
+
+class Solution
+{
+public:
+    //Time: O(N), Space: O(N)
+    TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
+    {
+        //If root doesn't exists
+        if (!root)
+            return NULL;
+
+        //If root is itself one of the node
+        if (root == p or root == q)
+            return root;
+
+        //calling for the left and right subtree and traverse the left and right of current subtree
+        TreeNode *left = lowestCommonAncestor(root->left, p, q);
+        TreeNode *right = lowestCommonAncestor(root->right, p, q);
+
+        //both the node exist under current subtree
+        if (left and right)
+            return root;
+
+        //both the node doesn't exist under current subtree
+        if (!left and !right)
+            return NULL;
+
+        //if one node is present in right of subtree
+        if (!left)
+            return right;
+        //if one node is present in left of subtree
+        return left;
     }
 };
