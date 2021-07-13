@@ -11,76 +11,68 @@ public:
     *   V: number of vertices
     *   adj[]: array of vectors to represent graph
     */
-    /*this is a standard question, it's just an implementation of
-    kosaraju's algorithm. Time: O(V+E)*/
-    void fillOrder(int v, vector<bool> &visited, stack<int> &Stack, vector<int> adj[])
+    //O(V+E), Space: O(V)
+    void dfs(vector<int> adj[], int node, stack<int> &st, vector<bool> &visited)
     {
-        visited[v] = true;
-
-        for (auto u : adj[v])
+        visited[node] = true;
+        for (auto it : adj[node])
         {
-            if (!visited[u])
-                fillOrder(u, visited, Stack, adj);
+            if (!visited[it])
+                dfs(adj, it, st, visited);
         }
-        Stack.push(v);
+        st.push(node);
     }
 
-    // vector<vector<int>> getTranspose(vector<int> adj[], int V){
-    //     vector<vector<int>> newGraph;
-    //     for(int v=0; v<V; v++){
-    //         for(auto x : adj[v])
-    //             newGraph[x].push_back(v);
-    //     }
-    //     return newGraph;
-    // }
-
-    void DFSUtil(int v, vector<bool> &visited, vector<int> graphTranspose[])
+    void reverseDFS(vector<int> transpose[], int node, vector<bool> &visited)
     {
-        visited[v] = true;
-        for (auto u : graphTranspose[v])
+        visited[node] = true;
+        for (auto it : transpose[node])
         {
-            if (!visited[u])
-                DFSUtil(u, visited, graphTranspose);
+            if (!visited[it])
+                reverseDFS(transpose, it, visited);
         }
     }
 
+    //Function to find number of strongly connected components in the graph.
     int kosaraju(int V, vector<int> adj[])
     {
-        //code here
-        stack<int> Stack;
-        vector<bool> visited(V, false);
+        //Step 1 -> Topological Sort
+        //Step 2 -> Transpose of graph
+        //Step 3 -> Again DFS of Tranposed graph till the stack becomes empty
 
+        vector<bool> visited(V, false);
+        stack<int> st;
+
+        //Step 1
         for (int i = 0; i < V; i++)
         {
-            if (visited[i] == false)
-                fillOrder(i, visited, Stack, adj);
+            if (!visited[i])
+                dfs(adj, i, st, visited);
         }
 
-        // vector<vector<int>> graphTranspose;
-        vector<int> graphTranspose[V];
+        //Step 2
+        vector<int> transpose[V];
         for (int v = 0; v < V; v++)
         {
-            for (int u : adj[v])
+            visited[v] = false;
+            for (auto u : adj[v])
             {
-                graphTranspose[u].push_back(v);
+                transpose[u].push_back(v);
             }
         }
 
-        for (int i = 0; i < V; i++)
-            visited[i] = false;
-
-        int components = 0;
-        while (!Stack.empty())
+        //Step 3
+        int scc = 0;
+        while (!st.empty())
         {
-            int v = Stack.top();
-            Stack.pop();
-
-            if (visited[v] == false)
+            int x = st.top();
+            st.pop();
+            if (!visited[x])
             {
-                DFSUtil(v, visited, graphTranspose);
-                components++;
+                reverseDFS(transpose, x, visited);
+                scc++;
             }
         }
-        return components;
+        return scc;
     }
 };
