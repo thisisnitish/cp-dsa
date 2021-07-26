@@ -17,7 +17,7 @@ class Solution
 {
 public:
     /*basic idea is to implement merge part of merge sort
-    Time: O(N)*/
+    Time: O(m+n)*/
     ListNode *mergeTwoLists(ListNode *l1, ListNode *l2)
     {
 
@@ -49,6 +49,10 @@ public:
             }
         }
 
+        /*here we can use while loop and go through the list all the way to the end
+        but that will take time and we know that the pointer which is pointing to the node
+        will go all the way to the end but instead of that we can directly add pointer
+        to the result pointer*/
         if (l1)
         {
             result->next = l1;
@@ -59,6 +63,7 @@ public:
             result->next = l2;
         }
 
+        //return result1->next     //we can use this one too
         result = result1->next;
         delete result1;
         return result;
