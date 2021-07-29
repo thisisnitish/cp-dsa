@@ -3,7 +3,40 @@ Leetcode Question 78. Subsets
 https://leetcode.com/problems/subsets/
 */
 
-//Solution 1
+//Easy and Recommended
+//Recursion
+class Solution
+{
+public:
+    vector<vector<int> > result;
+    vector<vector<int> > subsets(vector<int> &nums)
+    {
+        vector<int> v;
+        helper(nums, v);
+        return result;
+    }
+    void helper(vector<int> nums, vector<int> v)
+    {
+        //when the nums get empty we will get the subset
+        if (nums.size() == 0)
+        {
+            //push back to the result
+            result.push_back(v);
+            return;
+        }
+
+        auto v1 = v;
+        auto v2 = v;
+        v2.push_back(nums[0]);
+
+        nums.erase(nums.begin() + 0);
+
+        helper(nums, v1);
+        helper(nums, v2);
+        return;
+    }
+};
+
 //Backtracking Recursion
 class Solution
 {
@@ -50,7 +83,7 @@ public:
     }
 };
 
-//Solution 2
+//BackTracking
 class Solution
 {
 public:
@@ -75,9 +108,7 @@ public:
     }
 };
 
-//Solution 3
 //Bit Manipulation
-
 class Solution
 {
 public:
