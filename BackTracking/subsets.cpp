@@ -33,7 +33,6 @@ public:
 
         helper(nums, v1);
         helper(nums, v2);
-        return;
     }
 };
 
