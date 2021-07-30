@@ -8,6 +8,7 @@ https://leetcode.com/problems/subsets/
 class Solution
 {
 public:
+    //Time: O(2^n), Space: O(n)
     vector<vector<int> > result;
     vector<vector<int> > subsets(vector<int> &nums)
     {
