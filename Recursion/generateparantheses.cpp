@@ -6,36 +6,37 @@ https://leetcode.com/problems/generate-parentheses/
 class Solution
 {
 public:
+    //Time: O(2^2n), Space: O(n)
+    vector<string> parentheses;
     vector<string> generateParenthesis(int n)
     {
-        vector<string> result;
         int openBrackets = n;
         int closeBrackets = n;
         string output = "";
-        helper(openBrackets, closeBrackets, output, result);
-        return result;
+        helper(openBrackets, closeBrackets, output);
+        return parentheses;
     }
 
-    void helper(int openBrackets, int closeBrackets, string output, vector<string> &result)
+    void helper(int openBrackets, int closeBrackets, string output)
     {
-        if (openBrackets == 0 and closeBrackets == 0)
+        //Base Condition
+        if (openBrackets == 0 && closeBrackets == 0)
         {
-            result.push_back(output);
+            parentheses.push_back(output);
             return;
         }
 
         if (openBrackets != 0)
         {
-            string op = output;
-            op.push_back('(');
-            helper(openBrackets - 1, closeBrackets, op, result);
+            string output1 = output;
+            output1.push_back('(');
+            helper(openBrackets - 1, closeBrackets, output1);
         }
-
         if (closeBrackets > openBrackets)
         {
-            string op = output;
-            op.push_back(')');
-            helper(openBrackets, closeBrackets - 1, op, result);
+            string output2 = output;
+            output2.push_back(')');
+            helper(openBrackets, closeBrackets - 1, output2);
         }
     }
 };
