@@ -7,7 +7,7 @@ https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/
 class Solution
 {
 public:
-    //Time: O(mn), Space: O(1)
+    //Time: O(mn)
     int countNegatives(vector<vector<int> > &grid)
     {
         int count = 0;
@@ -24,30 +24,66 @@ public:
     }
 };
 
-//Using Binary Search
+//Binary Search
+class Solution
+{
+public:
+    //Time: O(mlogn), Space: O(1)
+    int countNegatives(vector<vector<int> > &grid)
+    {
+        int count = 0;
+        for (int i = 0; i < grid.size(); i++)
+        {
+            count += helper(grid[i]);
+        }
+        return count;
+    }
+
+    int helper(vector<int> &v)
+    {
+        int low = 0, high = v.size() - 1;
+
+        while (low <= high)
+        {
+            int mid = low + (high - low) / 2;
+
+            if (v[mid] >= 0)
+            {
+                low = mid + 1;
+            }
+            else
+            {
+                high = mid - 1;
+            }
+        }
+        return v.size() - 1 - high;
+    }
+};
+
+//Binary Search Prunning
 class Solution
 {
 public:
     //Time: O(m+n), Space: O(1)
     int countNegatives(vector<vector<int> > &grid)
     {
-        int m = grid.size();
-        int n = grid[0].size();
+        int m = grid.size();    //rows
+        int n = grid[0].size(); //cols
 
         int i = m - 1, j = 0;
         int count = 0;
-        // to start from the grid[m-1][0] position
         while (i >= 0 && j < n)
         {
             if (grid[i][j] < 0)
             {
-                //when the first occurrence of a number in a row is -ve, all following
-                //numbers will be -ve. So, add their count.
                 count += (n - j);
-                i--; //then move to the above row
+                i--;
+                j = 0;
             }
             else
-                j++; //else move to the right (i.e. to the next column)
+            {
+                j++;
+            }
         }
         return count;
     }
