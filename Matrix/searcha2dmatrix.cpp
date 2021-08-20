@@ -3,13 +3,51 @@ Leetcode Question 74. Search a 2D Matrix
 https://leetcode.com/problems/search-a-2d-matrix/
 */
 
+//Solution 1
+class Solution
+{
+public:
+    /*
+    Time: O(m + n), Space: O(1)
+    Basic idea is to apply binary search from the top right corner of the matrix and start
+    comparing the elements.
+    */
+    bool searchMatrix(vector<vector<int> > &matrix, int target)
+    {
+        if (matrix.empty())
+            return false;
+
+        int m = matrix.size();
+        int n = matrix[0].size();
+
+        int i = 0, j = n - 1;
+        while (i < m && j >= 0)
+        {
+            //if target is found then return true
+            if (matrix[i][j] == target)
+                return true;
+            /*if target is less than the element then entire column is useless so go to the 
+            next column*/
+            else if (matrix[i][j] > target)
+                j--;
+            /*if target is more than the element then entire row is useless so go to the
+            next row*/
+            else if (matrix[i][j] < target)
+                i++;
+        }
+        //if didn't found the element
+        return false;
+    }
+};
+
+//Solution 2
 class Solution
 {
 public:
     /*the basic idea is to traverse the entire matrix.
     if found return true else false
     Time: O(N), Space: O(1)*/
-    bool searchMatrix(vector<vector<int>> &matrix, int target)
+    bool searchMatrix(vector<vector<int> > &matrix, int target)
     {
         if (matrix.empty())
             return false;
@@ -44,7 +82,6 @@ public:
                         return true;
                 }
             }
-
             r1++;
             r2--;
             c1++;
