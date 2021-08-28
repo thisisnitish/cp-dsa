@@ -6,122 +6,74 @@ https://leetcode.com/problems/n-queens/
 class Solution
 {
 public:
-    vector<vector<string>> result;
-    vector<string> s;
-
-    void print(vector<vector<int>> v)
+    //Time: O(N^2)
+    vector<vector<string> > result;
+    bool isSafe(int row, int col, vector<string> &board, int n)
     {
-        s.clear();
-        for (int i = 0; i < v.size(); i++)
-        {
-            string x = "";
+        int duprow = row, dupcol = col;
 
-            for (int j = 0; j < v.size(); j++)
-            {
-                if (v[i][j] == 1)
-                {
-                    x += "Q";
-                }
-                else
-                {
-                    x += ".";
-                }
-            }
-            s.push_back(x);
-        }
-        result.push_back(s);
-    }
-
-    bool isSafe(vector<vector<int>> board, int x, int y)
-    {
-        /*here we are checking that a particular 
-        column consist of a queen or not
-        so, for that column we are checking every 
-        row we can do the vice versa also i.e. 
-        for a row every column*/
-        for (int row = 0; row < x; row++)
-        {
-            if (board[row][y])
-                return false;
-        }
-
-        //now checking for the diagnols
-        //checking for the left diagnol
-        int row = x;
-        int col = y;
-
+        //check for the upper row
         while (row >= 0 && col >= 0)
         {
-            if (board[row][col])
+            if (board[row][col] == 'Q')
                 return false;
             row--;
             col--;
         }
 
-        //checking for the right diagnol
-        row = x;
-        col = y;
-
-        while (row >= 0 && col < board.size())
+        //check for the left side
+        row = duprow;
+        col = dupcol;
+        while (col >= 0)
         {
-            if (board[row][col])
+            if (board[row][col] == 'Q')
                 return false;
-            row--;
-            col++;
+            col--;
         }
 
+        //check for the left down side
+        row = duprow;
+        col = dupcol;
+        while (row < n && col >= 0)
+        {
+            if (board[row][col] == 'Q')
+                return false;
+            row++;
+            col--;
+        }
+        //if everything is fine
         return true;
     }
 
-    /*we don't the column i.e. y here because as 
-    soon as we put the queen in the particular 
-    position in a row then we don't need to 
-    move further, we can switch to the next row*/
-    bool nQueen(vector<vector<int>> &board, int x)
+    void helper(int col, vector<string> &board, int n)
     {
-        /*base condition where we have put the 
-        n queens to thier respective position*/
-        if (x >= board.size())
-        { 
-            /*this is specific to the questions which is asked, 
-            but for generic case we have to change the print function a bit*/
-            print(board);     
-            return true;
-        }
-
-        /*now we will call the function recursively but 
-        before we will check for a position whether 
-        it is safe or not*/
-
-        for (int col = 0; col < board.size(); col++)
+        if (col == n)
         {
-            if (isSafe(board, x, col))
+            result.push_back(board);
+            return;
+        }
+        //for every col just try every row means for every col check every value means
+        //go vertically down
+        for (int row = 0; row < n; row++)
+        {
+            if (isSafe(row, col, board, n))
             {
-                board[x][col] = 1;
-
-                /*//checking for the next row i.e.
-                recursively call to place rest of queens
-                if(nQueen(board, x+1)){
-                    return true;
-                }
-                */
-
-                /*for this question specifically we 
-                have to do this but above commented 
-                if condition, is the generic apporach*/
-                nQueen(board, x + 1);
-
-                //backtracking
-                board[x][col] = 0;
+                board[row][col] = 'Q';
+                helper(col + 1, board, n);    //for the next column
+                board[row][col] = '.';
             }
         }
-        return false;
     }
 
-    vector<vector<string>> solveNQueens(int n)
+    vector<vector<string> > solveNQueens(int n)
     {
-        vector<vector<int>> v(n, vector<int>(n, 0));
-        nQueen(v, 0);
+        vector<string> board(n);
+        string s(n, '.');
+        for (int i = 0; i < n; i++)
+        {
+            board[i] = s;
+        }
+        helper(0, board, n);
         return result;
     }
 };
