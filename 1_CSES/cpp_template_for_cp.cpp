@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 #define ll long long
 #define MOD 1e9+7;
 #define PI = 3.1415926535897932384626433832795;
@@ -7,7 +8,7 @@ using namespace std;
 int gcd(ll a, ll b);
 
 void solve(){
-
+	
 }
 
 int gcd(ll a, ll b){
@@ -16,6 +17,8 @@ int gcd(ll a, ll b){
 }
 
 int main(){
+	ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 	ll t;
 	cin>>t;
 
