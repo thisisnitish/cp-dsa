@@ -12,11 +12,12 @@ public:
     Time: O(2^N), Space: O(N)*/
     bool helper(string s1, string s2)
     {
-        if (s1.size() != s2.size())
-            return false;
 
-        if (s1 == s2 || s1.size() == 0)
+        if (s1 == s2)
             return true;
+
+        if (s1.size() <= 1)
+            return false;
 
         int n = s1.size();
 
@@ -57,11 +58,11 @@ public:
     unordered_map<string, bool> mp;
     bool helper(string s1, string s2)
     {
-        if (s1.size() != s2.size())
-            return false;
-
-        if (s1 == s2 || s1.size() == 0)
+        if (s1 == s2)
             return true;
+
+        if (s1.size() <= 1)
+            return false;
 
         int n = s1.size();
 
