@@ -3,38 +3,81 @@ Leetcode Question 140. Word Break II
 https://leetcode.com/problems/word-break-ii/
 */
 
+// Solution 1
 class Solution
 {
 public:
-    unordered_map<string, vector<string>> dp;
+    // Time: O(N^N)
     vector<string> wordBreak(string s, vector<string> &wordDict)
     {
-        /*the basic idea is take element from the list and start searching in the string*/
-        if (dp.find(s) != dp.end())
-            return dp[s];
         vector<string> result;
+        string ans = "";
+        findWordBreak(0, s, ans, wordDict, result);
+        return result;
+    }
 
-        for (string w : wordDict)
+    void findWordBreak(int idx, string s, string ans, vector<string> &wordDict, vector<string> &result)
+    {
+
+        if (idx == s.size())
         {
-            //comparing substring to the w string
-            if (s.substr(0, w.length()) == w)
+            // if we go index out of bound then remove the last space and store that string
+            ans.pop_back();
+            result.push_back(ans);
+            return;
+        }
+
+        string str = "";
+        for (int i = idx; i < s.size(); i++)
+        {
+            str.push_back(s[i]);
+
+            if (find(wordDict.begin(), wordDict.end(), str) != wordDict.end())
             {
-                //this will happen when you will reach end of the string recursively
-                if (w.length() == s.length())
-                {
-                    result.push_back(w);
-                }
-                else
-                {
-                    vector<string> temp = wordBreak(s.substr(w.length()), wordDict);
-                    for (string t : temp)
-                    {
-                        result.push_back(w + " " + t);
-                    }
-                }
+                findWordBreak(i + 1, s, ans + str + " ", wordDict, result);
             }
         }
-        dp[s] = result;
+    }
+};
+
+// Solution 2
+class Solution
+{
+public:
+    // Time: O(N^N)
+    vector<string> wordBreak(string s, vector<string> &wordDict)
+    {
+        unordered_set<string> us;
+        vector<string> result;
+        for (auto c : wordDict)
+        {
+            us.insert(c);
+        }
+        string ans = "";
+        findWordBreak(0, s, ans, us, result);
         return result;
+    }
+
+    void findWordBreak(int idx, string s, string ans, unordered_set<string> &us, vector<string> &result)
+    {
+
+        if (idx == s.size())
+        {
+            // if we go index out of bound then remove the last space and store that string
+            ans.pop_back();
+            result.push_back(ans);
+            return;
+        }
+
+        string str = "";
+        for (int i = idx; i < s.size(); i++)
+        {
+            str.push_back(s[i]);
+
+            if (us.count(str))
+            {
+                findWordBreak(i + 1, s, ans + str + " ", us, result);
+            }
+        }
     }
 };
