@@ -13,7 +13,6 @@ using namespace std;
 int gcd(ll a, ll b);
 
 void solve(){
-	
 }
 
 int gcd(ll a, ll b){
