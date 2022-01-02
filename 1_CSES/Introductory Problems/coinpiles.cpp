@@ -9,52 +9,10 @@ void solve(){
 	ll a, b;
 	cin>>a>>b;
 
-	if(a == b){
-		if(a == 0 and b == 0){
-			cout<<"YES"<<endl;
-		}
-		else if(a % 2 == 0){
-			cout<<"NO"<<endl;
-		}
-		else{
-			cout<<"YES"<<endl;
-		}
-	}
-	else{
-		while(a != 0 and b != 0){
-			if(a > b){
-				a = a - 2;
-				b = b - 1;
-			}
-			else{
-				a = a - 1;
-				b = b - 2;
-			}
-
-			if(a == 0 and b == 0){
-				cout<<"YES"<<endl;
-				break;
-			}
-
-			if(a == b){
-				if(a % 2 == 0){
-					cout<<"NO"<<endl;
-					break;
-				}
-				else{
-					cout<<"YES"<<endl;
-					break;
-				}
-			}
-		}
-
-		if(a == 0 and b == 0){
-			cout<<"YES"<<endl;
-		}
-		else{
-			cout<<"NO"<<endl;
-		}
-	}
+	bool caseI = ((2*a - b) >= 0) && ((2*a - b) % 3 == 0);
+	bool caseII = ((2*b - a) >= 0) && ((2*b - a) % 3 == 0);
+	if(caseI && caseII) cout<<"YES"<<endl;
+	else cout<<"NO"<<endl; 
 }
 
 int main(){
