@@ -24,18 +24,35 @@ public:
         ListNode *prev;
         ListNode *temp;
         prev = head;
-        prev = head;
-        //int temp;
         while (temp->next != NULL)
         {
             prev = temp;
             temp = temp->next;
             swap(prev->val, temp->val);
             temp = temp->next;
-            //r = t->next;
             if (temp == NULL)
                 break;
         }
         return (head);
+    }
+};
+
+// Solution 2
+class Solution
+{
+public:
+    //Time: O(N)
+    ListNode *swapPairs(ListNode *head)
+    {
+        if (head == NULL || head->next == NULL)
+            return head;
+
+        ListNode *temp = head;
+        head = head->next;
+        temp->next = head->next;
+        head->next = temp;
+
+        temp->next = swapPairs(temp->next);
+        return head;
     }
 };
