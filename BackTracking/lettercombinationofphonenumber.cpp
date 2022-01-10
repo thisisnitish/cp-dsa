@@ -3,6 +3,7 @@ Leetcode Question 17. Letter Combinations of a Phone Number
 https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 */
 
+// Interative
 class Solution
 {
 public:
@@ -48,5 +49,48 @@ public:
             result = temp;
         }
         return result;
+    }
+};
+
+// Recursive
+class Solution
+{
+public:
+    unordered_map<char, string> mp;
+    vector<string> allCombinations;
+
+    void makeLetterCombinations(string &digits, string &combi, int idx)
+    {
+        // base case
+        if (idx == digits.size())
+        {
+            allCombinations.push_back(combi);
+            return;
+        }
+
+        for (auto c : mp[digits[idx]])
+        {
+            combi.push_back(c);
+            makeLetterCombinations(digits, combi, idx + 1);
+            combi.pop_back();
+        }
+    }
+
+    vector<string> letterCombinations(string digits)
+    {
+        if (digits.length() == 0)
+            return {};
+        mp['2'] = "abc";
+        mp['3'] = "def";
+        mp['4'] = "ghi";
+        mp['5'] = "jkl";
+        mp['6'] = "mno";
+        mp['7'] = "pqrs";
+        mp['8'] = "tuv";
+        mp['9'] = "wxyz";
+
+        string combi;
+        makeLetterCombinations(digits, combi, 0);
+        return allCombinations;
     }
 };
