@@ -6,7 +6,7 @@ https://leetcode.com/problems/n-queens/
 class Solution
 {
 public:
-    //Time: O(N^2)
+    //Time: O(N!), Space: O(N^2)
     vector<vector<string> > result;
     bool isSafe(int row, int col, vector<string> &board, int n)
     {
