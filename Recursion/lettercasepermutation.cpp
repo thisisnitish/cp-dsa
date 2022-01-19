@@ -6,44 +6,51 @@ https://leetcode.com/problems/letter-case-permutation/
 class Solution
 {
 public:
-    //Time: O(2^n), Space: O(n)
-    vector<string> result;
-    vector<string> letterCasePermutation(string s)
+    // Time: O(2^N), Space: O(2^N)
+    vector<string> allpermutations;
+    void findPermutations(string s, string permutation)
     {
-        string ip = s;
-        string op = "";
-        helper(ip, op);
-        return result;
-    }
-
-    void helper(string ip, string op)
-    {
-        if (ip.size() == 0)
+        // base case
+        if (s.size() == 0)
         {
-            result.push_back(op);
+            allpermutations.push_back(permutation);
             return;
         }
 
-        if (isalpha(ip[0]))
+        if (isalpha(s[0]))
         {
-            string op1 = op;
-            string op2 = op;
+            string permutation1 = permutation;
+            string permutation2 = permutation;
 
-            op1.push_back(toupper(ip[0]));
-            op2.push_back(tolower(ip[0]));
+            /*
+            as the question says,you can transform every letter individually to be
+            lowercase or uppercase to create another string. So, we have 2 choices,
+            if we encounter an alphabet.
+            */
 
-            ip.erase(ip.begin() + 0);
+            permutation1.push_back(toupper(s[0]));
+            permutation2.push_back(tolower(s[0]));
 
-            helper(ip, op1);
-            helper(ip, op2);
+            s.erase(s.begin() + 0);
+
+            findPermutations(s, permutation1);
+            findPermutations(s, permutation2);
         }
         else
         {
-            string op1 = op;
-            op1.push_back(ip[0]);
+            string permutation1 = permutation;
+            permutation1.push_back(s[0]);
 
-            ip.erase(ip.begin() + 0);
-            helper(ip, op1);
+            s.erase(s.begin() + 0);
+
+            findPermutations(s, permutation1);
         }
+    }
+
+    vector<string> letterCasePermutation(string s)
+    {
+        string permutation;
+        findPermutations(s, permutation);
+        return allpermutations;
     }
 };
