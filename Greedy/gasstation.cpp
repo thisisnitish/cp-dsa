@@ -54,13 +54,17 @@ public:
         if (g < c)
             return -1;
         int start = 0;
-        int fuel = 0;
+        int balanceFuel = 0;
         for (int i = 0; i < n; i++)
         {
-            fuel += (gas[i] - cost[i]);
-            if (fuel < 0)
+            balanceFuel += (gas[i] - cost[i]);
+
+            /*
+            if we ran out of fuel then we have to start from next index
+            */
+            if (balanceFuel < 0)
             {
-                fuel = 0;
+                balanceFuel = 0;
                 start = i + 1;
             }
         }
