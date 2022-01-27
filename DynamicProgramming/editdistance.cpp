@@ -50,11 +50,11 @@ Example - s1 = "abc", s2 = "bcd", m=3, n=3 lengths of strings respectively
 2. if n = 0, then Obviously, we have to delete m characters in s1 to make s2
 */
 
-//Recursive
+// Recursive
 class Solution
 {
 public:
-    //Time: O(min(3^m, 3^n)), Space: O(N);
+    // Time: O(min(3^m, 3^n)), Space: O(N);
     int minDistance(string word1, string word2)
     {
         int m = word1.length(), n = word2.length();
@@ -81,11 +81,11 @@ public:
     }
 };
 
-//Recursive + Memoization, TopDown Approach
+// Recursive + Memoization, TopDown Approach
 class Solution
 {
 public:
-    //Time: O(m*n), Space: O(m*n);
+    // Time: O(m*n), Space: O(m*n);
     int minDistance(string word1, string word2)
     {
         int m = word1.length(), n = word2.length();
@@ -96,9 +96,9 @@ public:
     int editDistance(string &word1, string &word2, int m, int n, vector<vector<int> > &memo)
     {
         if (m == 0)
-            return n;
+            return memo[m][n] = n;
         if (n == 0)
-            return m;
+            return memo[m][n] = m;
 
         if (memo[m][n] != -1)
             return memo[m][n];
@@ -116,24 +116,25 @@ public:
     }
 };
 
-//BottomUp Approach
+// BottomUp Approach
 class Solution
 {
 public:
-    //Time: O(m*n), Space: O(m*n);
+    // Time: O(m*n), Space: O(m*n);
     int minDistance(string word1, string word2)
     {
         int m = word1.length(), n = word2.length();
         vector<vector<int> > dp(m + 1, vector<int>(n + 1, 0));
 
-        //Base conditions
+        // Base conditions
+
         for (int i = 0; i < m + 1; i++)
             dp[i][0] = i;
 
         for (int j = 0; j < n + 1; j++)
             dp[0][j] = j;
 
-        //solving the sub-problems
+        // solving the sub-problems
         for (int i = 1; i < m + 1; i++)
         {
             for (int j = 1; j < n + 1; j++)
