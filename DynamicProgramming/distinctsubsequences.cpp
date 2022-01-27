@@ -3,11 +3,11 @@ Leetcode Question 115. Distinct Subsequences
 https://leetcode.com/problems/distinct-subsequences/
 */
 
-//Recursive
+// Recursive
 class Solution
 {
 public:
-    //Time: O(2^n), Space: O(2^n)
+    // Time: O(2^N), Space: O(2^N)
     int numDistinct(string s, string t)
     {
         int m = s.length();
@@ -29,11 +29,11 @@ public:
     }
 };
 
-//Recursive + Memoization Top Down Approach
+// Recursive + Memoization Top Down Approach
 class Solution
 {
 public:
-    //Time: O(m*n), Space: O(m*n)
+    // Time: O(m*n), Space: O(m*n)
     int numDistinct(string s, string t)
     {
         int m = s.length();
@@ -45,9 +45,9 @@ public:
     int lcs(string &s, string &t, int m, int n, vector<vector<int> > &memo)
     {
         if (n == 0)
-            return 1;
+            return memo[m][n] = 1;
         if (m < n)
-            return 0;
+            return memo[m][n] = 0;
 
         if (memo[m][n] != -1)
             return memo[m][n];
@@ -59,11 +59,11 @@ public:
     }
 };
 
-//Bottom Up Approach
+// BottomUp Approach
 class Solution
 {
 public:
-    //Time: O(m*n), Space: O(m*n)
+    // Time: O(m*n), Space: O(m*n)
     int numDistinct(string s, string t)
     {
         int m = s.length();
@@ -84,7 +84,7 @@ public:
             for (int j = 1; j < n + 1; j++)
             {
                 if (i < j)
-                    continue;
+                    dp[i][j] = 0;
                 if (s[i - 1] == t[j - 1])
                     dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
                 else
