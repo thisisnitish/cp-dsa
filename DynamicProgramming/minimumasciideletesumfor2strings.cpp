@@ -76,7 +76,7 @@ public:
     int lcs(string &s1, string &s2, int m, int n)
     {
         if (m == 0 || n == 0)
-            return 0;
+            return memo[m][n] = 0;
 
         if (memo[m][n] != -1)
             return memo[m][n];
