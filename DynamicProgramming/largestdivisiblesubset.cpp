@@ -4,21 +4,24 @@ https://leetcode.com/problems/largest-divisible-subset/
 */
 
 /*
-    Another variation of LIS.
-    we can tweak the statement a little bit: Longest increasing subsequence such that every current element is divisible by prev element.
-    Now, the question seems very meaningful.
+This is a 3 step solution. This is a variation of LIS
+1. Sort the array
+2. Get the LIS till every index.
+3. Find the subset
 */
+
 class Solution
 {
 public:
-    //Time: O(NlogN + N^2 + N), Space: O(N)
+    // Time: O(NlogN + N^2 + N), Space: O(N + length of subset)
     vector<int> largestDivisibleSubset(vector<int> &nums)
     {
         int n = nums.size();
-        sort(nums.begin(), nums.end());
+        sort(nums.begin(), nums.end()); //Step 1
+
         vector<int> dp(n, 1);
-        int res = 1;
-        for (int i = 0; i < n; i++)
+        int res = 1; // shows the length of the LIS
+        for (int i = 0; i < n; i++)     //Step 2
         {
             for (int j = 0; j < i; j++)
             {
@@ -30,17 +33,17 @@ public:
             }
         }
 
-        int prev = -1;
-        vector<int> result;
+        int prevElement = -1;
+        vector<int> subset;             //Step 3
         for (int i = n - 1; i >= 0; i--)
         {
-            if (res == dp[i] && (prev == -1 || prev % nums[i] == 0))
+            if (res == dp[i] && (prevElement == -1 || prevElement % nums[i] == 0))
             {
-                result.push_back(nums[i]);
+                subset.push_back(nums[i]);
                 res--;
-                prev = nums[i];
+                prevElement = nums[i];
             }
         }
-        return result;
+        return subset;
     }
 };
