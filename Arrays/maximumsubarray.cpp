@@ -3,36 +3,42 @@ Leetcode Question 53. Maximum Subarray
 https://leetcode.com/problems/maximum-subarray/
 */
 
-//Soultion 1
+// Brute Froce
 class Solution
 {
 public:
+    // Time: O(N^2), Space: O(1)
     int maxSubArray(vector<int> &nums)
     {
-        
-        int curr_max = nums[0];
-        int global_max = nums[0];
-        for (int i = 1; i < nums.size(); i++){
-            curr_max = max(curr_max + nums[i], nums[i]);
-            global_max = max(curr_max, global_max);
+        int maxSum = INT_MIN;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            int sum = 0;
+            for (int j = i; j < nums.size(); j++)
+            {
+                sum += nums[j];
+                maxSum = max(sum, maxSum);
+            }
         }
-        return global_max;
+        return maxSum;
     }
 };
 
-//Soutlion 2
+// Kadane's Algorithm - Dynamic Programming
 class Solution
 {
 public:
+    // Time: O(N), Space: O(1)
     int maxSubArray(vector<int> &nums)
     {
-        //But the problem with this solution is, it will not handle the negative numbers
-        int curr_max = 0, global_max = 0;
-        for(int i=0; i<nums.size(); i++){
-            curr_max = curr_max + nums[i];
-            if(curr_max < 0) curr_max = 0;
-            else if(global_max < curr_max) global_max = curr_max;
+        int maxSoFar = nums[0];
+        int globalMax = nums[0];
+
+        for (int i = 1; i < nums.size(); i++)
+        {
+            maxSoFar = max(nums[i], nums[i] + maxSoFar);
+            globalMax = max(globalMax, maxSoFar);
         }
-        return global_max;
+        return globalMax;
     }
 };
