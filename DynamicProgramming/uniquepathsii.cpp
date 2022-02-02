@@ -3,99 +3,122 @@ Leetcode Question 63. Unique Paths II
 https://leetcode.com/problems/unique-paths-ii/
 */
 
-//Recusrive
+/*
+This is an exetension of unique path question. Here also, we need to explore all the
+paths. But, one thing to notice here is, we have an obstacle in a grid and we need to
+by pass that obstacle in order to reach the target.
+
+Also,If we design the recursive solution, we will find out that, it has so many
+repetitive paths, that is a sure hint to move towards the DP solution.
+*/
+
+// Recursive
 class Solution
 {
 public:
-    //Time: O(2^n), Space: O(n)
-    int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid)
+    // Time: O(2^m*n), Space: O(2^m*n)
+    int countUniquePaths(vector<vector<int> > &obstacleGrid, int x, int y, int m, int n)
     {
-        int m = obstacleGrid.size();    //rows
-        int n = obstacleGrid[0].size(); //columns
-        return helper(obstacleGrid, m, n, 0, 0);
-    }
-
-    int helper(vector<vector<int> > &obstacleGrid, int m, int n, int x, int y)
-    {
-        if (x >= m || y >= n || obstacleGrid[x][y] == 1)
+        // base case
+        if (x >= m || y >= n)
+            return 0;
+        if (obstacleGrid[x][y] == 1)
             return 0;
         if (x == m - 1 && y == n - 1)
             return 1;
 
-        return helper(obstacleGrid, m, n, x + 1, y) + helper(obstacleGrid, m, n, x, y + 1);
+        return countUniquePaths(obstacleGrid, x + 1, y, m, n) +
+               countUniquePaths(obstacleGrid, x, y + 1, m, n);
+    }
+
+    int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid)
+    {
+        int m = obstacleGrid.size();
+        int n = obstacleGrid[0].size();
+
+        return countUniquePaths(obstacleGrid, 0, 0, m, n);
     }
 };
 
-//Memoization - TopDown approach
+// Recursive + Memoization
 class Solution
 {
 public:
-    //Time: O(m*n), Space: O(m*n)
-    int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid)
+    // Time: O(m*n), Space: O(m*n)
+    vector<vector<int> > memo;
+    int countUniquePaths(vector<vector<int> > &obstacleGrid, int x, int y, int m, int n)
     {
-        int m = obstacleGrid.size();    //rows
-        int n = obstacleGrid[0].size(); //columns
-        vector<vector<int> > memo(m, vector<int>(n, -1));
-        return helper(obstacleGrid, m, n, 0, 0, memo);
-    }
-
-    int helper(vector<vector<int> > &obstacleGrid, int m, int n, int x, int y, vector<vector<int> > &memo)
-    {
-        if (x >= m || y >= n || obstacleGrid[x][y] == 1)
+        // base case
+        if (x >= m || y >= n)
             return 0;
+        if (obstacleGrid[x][y] == 1)
+            return memo[x][y] = 0;
         if (x == m - 1 && y == n - 1)
-            return 1;
+            return memo[x][y] = 1;
 
         if (memo[x][y] != -1)
             return memo[x][y];
 
-        memo[x][y] = helper(obstacleGrid, m, n, x + 1, y, memo) +
-                     helper(obstacleGrid, m, n, x, y + 1, memo);
-
+        memo[x][y] = countUniquePaths(obstacleGrid, x + 1, y, m, n) +
+                     countUniquePaths(obstacleGrid, x, y + 1, m, n);
         return memo[x][y];
+    }
+
+    int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid)
+    {
+        int m = obstacleGrid.size();
+        int n = obstacleGrid[0].size();
+
+        memo.resize(m, vector<int>(n, -1));
+
+        return countUniquePaths(obstacleGrid, 0, 0, m, n);
     }
 };
 
-//BottomUp
+// Tabulation
 class Solution
 {
 public:
-    //Time: O(m*n), Space: O(m*n)
+    // Time: O(m*n), Space: O(m*n)
     int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid)
     {
-        int m = obstacleGrid.size();    //rows
-        int n = obstacleGrid[0].size(); //columns
-        return helper(obstacleGrid, m, n);
-    }
+        int m = obstacleGrid.size();
+        int n = obstacleGrid[0].size();
 
-    int helper(vector<vector<int> > &obstacleGrid, int m, int n)
-    {
         if (obstacleGrid[0][0] == 1)
             return 0;
 
         vector<vector<int> > dp(m, vector<int>(n, 0));
 
-        dp[0][0] = 1;
+        // initialization
+        for (int j = 0; j < n; j++)
+        {
+            if (obstacleGrid[0][j] != 1)
+                dp[0][j] = 1;
+            else
+                break;
+        }
 
-        //filling the first column
-        for (int i = 1; i < m; i++)
-            if (obstacleGrid[i][0] == 0)
-                dp[i][0] = dp[i - 1][0];
+        for (int i = 0; i < m; i++)
+        {
+            if (obstacleGrid[i][0] != 1)
+                dp[i][0] = 1;
+            else
+                break;
+        }
 
-        //filling the first row
-        for (int j = 1; j < n; j++)
-            if (obstacleGrid[0][j] == 0)
-                dp[0][j] = dp[0][j - 1];
-
-        //filling the matrix
+        // solving the sub problems
         for (int i = 1; i < m; i++)
         {
             for (int j = 1; j < n; j++)
             {
-                if (obstacleGrid[i][j] == 0)
+                if (obstacleGrid[i][j] != 1)
                     dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                else
+                    dp[i][j] = 0;
             }
         }
+
         return dp[m - 1][n - 1];
     }
 };
