@@ -58,3 +58,27 @@ public:
         return dp[n];
     }
 };
+
+// Space Optmized
+class Solution
+{
+public:
+    // Time: O(n), Space: O(1)
+    int climbStairs(int n)
+    {
+        if (n <= 2)
+            return n;
+        int firstStep = 1;
+        int secondStep = 2;
+
+        int nextStep = 0;
+        for (int i = 3; i <= n; i++)
+        {
+            nextStep = firstStep + secondStep;
+            firstStep = secondStep;
+            secondStep = nextStep;
+        }
+
+        return nextStep;
+    }
+};
