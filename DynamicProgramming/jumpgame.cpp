@@ -18,7 +18,7 @@ second way can also be done, with some minute changes to the below code.
 class Solution
 {
 public:
-    // Time: Exponential
+    // Time: O(N^2)
     bool canJumpImpl(vector<int> &nums, int idx)
     {
         // base case
@@ -42,7 +42,7 @@ public:
 class Solution
 {
 public:
-    // Time: Exponential
+    // Time: O(N)
     bool canJumpImpl(vector<int> &nums, int idx, vector<int> &memo)
     {
         // base case
