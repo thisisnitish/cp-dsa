@@ -22,6 +22,11 @@ No subset with given sum
 
 Time: O(N*sum)
 Space: O(N*sum)
+
+We can do all the approaches of this problem i.e. Recursive and Recursive + Memoization.
+But we have done only Tabulation or Bottom Up Approach, which is fine.
+Also, if you are doing that approach just ignore the value array, because we are not 
+looking for maximum profit or so. We just want if that subset exists or not?.
 */
 
 #include<iostream>
