@@ -30,15 +30,15 @@ public:
                 if (S1[i - 1] == S2[j - 1])
                 {
                     dp[i][j] = 1 + dp[i - 1][j - 1];
-                    //this could be done in separate array but we are doing in
-                    //same loop
-                    //since we want the longest string
-                    result = max(result, dp[i][j]);
                 }
                 else
                 {
                     dp[i][j] = 0;
                 }
+                // this could be done in separate array but we are doing in
+                // same loop
+                // since we want the longest string
+                result = max(result, dp[i][j]);
             }
         }
         return result;
