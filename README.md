@@ -199,6 +199,6 @@
 ## Contributing
 Everyone is welcome to contribute. We gladly accept patches, pull requests, bug reports or any other improvements. Read below to see how you can get started.
 
-## How to use this repo... working on this
+## How to use this repo
+Just Fork the repo and clone it and start coding.
 
-### In progess... we are working on this
