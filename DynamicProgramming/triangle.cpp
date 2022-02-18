@@ -4,7 +4,7 @@ https://leetcode.com/problems/triangle/
 */
 
 /*
-This question is a variation of minimum path sum. We can do with recursive and
+This question is a variation of minimum falling path sum. We can do with recursive and
 memoization also. But, I've done with tabulation.
 */
 // Solution 1
