@@ -1,46 +1,49 @@
 /*
 Topological sort
-https://practice.geeksforgeeks.org/problems/topological-sort/1#
+https://practice.geeksforgeeks.org/problems/topological-sort/1/#
 */
 
-class Solution{
+class Solution
+{
 public:
-    /*this is the standard implementation of topological sort, Time: O(V+E)*/
-    void topologicalSortUtil(int v, vector<int> &visited, stack<int> &Stack, vector<int> adj[])
+    // Function to return list containing vertices in Topological order.
+    void toposort(int node, vector<int> adj[], vector<int> &vis, stack<int> &st)
     {
-        visited[v] = true;
-
-        vector<int>::iterator itr;
-        for (itr = adj[v].begin(); itr != adj[v].end(); itr++)
+        vis[node] = 1; // mark it visited
+        for (auto it : adj[node])
         {
-            if (!visited[*itr])
+            if (!vis[it])
             {
-                topologicalSortUtil(*itr, visited, Stack, adj);
+                toposort(it, adj, vis, st);
             }
         }
-        Stack.push(v);
+        //when the dfs for 'node' is completed, push it to the stack
+        st.push(node);
     }
 
     vector<int> topoSort(int V, vector<int> adj[])
     {
-        // code here
-        stack<int> Stack;
-        vector<int> visited(V, false);
-        vector<int> result;
+        vector<int> vis(V, 0);
+        stack<int> st;
 
+        // graph might be disconnected
         for (int i = 0; i < V; i++)
         {
-            if (visited[i] == false)
+            if (!vis[i])
             {
-                topologicalSortUtil(i, visited, Stack, adj);
+                // toposort always works for DAG
+                toposort(i, adj, vis, st);
             }
         }
 
-        while (!Stack.empty())
+        // return the topo sort elements
+        vector<int> result;
+        while (!st.empty())
         {
-            result.push_back(Stack.top());
-            Stack.pop();
+            result.push_back(st.top());
+            st.pop();
         }
+
         return result;
     }
-}
+};
