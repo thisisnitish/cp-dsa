@@ -3,16 +3,18 @@ Leetcode Question 743. Network Delay Time
 https://leetcode.com/problems/network-delay-time/
 */
 
+/*
+This is an implementation of dijkstra's algorithm
+*/
 class Solution
 {
 public:
-    /*the basic idea is that indirectly the question itself is asking single
-    source shortest path, so we can apply dijsktra's algorithm.
-    Time: O(ElogV)*/
+    // Time: O(n + Elogn), Space: O(n) + O(n)
     int networkDelayTime(vector<vector<int> > &times, int n, int k)
     {
-        vector<vector<pair<int, int> > > adj(n + 1);
+        vector<pair<int, int> > adj[n + 1]; // adjacency list
 
+        // build the directed graph
         for (auto edge : times)
         {
             adj[edge[0]].push_back(make_pair(edge[1], edge[2]));
@@ -21,9 +23,10 @@ public:
         priority_queue<pair<int, int>, vector<pair<int, int> >, greater<pair<int, int> > > pq;
 
         vector<int> distance(n + 1, INT_MAX);
-        distance[k] = 0;
+        distance[k] = 0; // since k is a source node
 
-        pq.push(make_pair(0, k));
+        //(distance, node)
+        pq.push({0, k});
 
         while (!pq.empty())
         {
@@ -38,12 +41,11 @@ public:
                 if (distance[v] > distance[u] + weight)
                 {
                     distance[v] = distance[u] + weight;
-                    pq.push(make_pair(distance[v], v));
+                    pq.push({distance[v], v});
                 }
             }
         }
 
-        //since we want the maximum from the distance
         int result = 0;
         for (int i = 1; i <= n; i++)
         {
