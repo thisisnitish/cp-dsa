@@ -1,5 +1,5 @@
 /*
-Minimum Spanning Tree
+Minimum Spanning Tree By Prims Alogrithms
 https://practice.geeksforgeeks.org/problems/minimum-spanning-tree/1/#
 */
 

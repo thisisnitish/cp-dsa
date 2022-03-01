@@ -1,83 +1,82 @@
-/*CPP code for Krushkal's Algorithms for Adjacency Matrix
-here Infinity means INT_MAX but to represent numerically we have taken this as 9999.
-The basic idea is sort all the edges in increasing order of their weight,
-pick the smallest edge check if it is forming a cycle with the mst so far if yes discard it
-else include it in the tree and repeat this v-1 times (edges)
-Input:
-9999, 2, 9999, 6, 9999,
-2, 9999, 3, 8, 5,
-9999, 3, 9999, 9999, 7,
-6, 8, 9999, 9999, 9,
-9999, 5, 7, 9, 9999
+/*CPP code for Krushkal's Algorithms*/
 
-Output:
-Edge 0: (0, 1) Cost: 2
-Edge 1: (1, 2) Cost: 3
-Edge 2: (1, 4) Cost: 5
-Edge 3: (0, 3) Cost: 6
-Minimum Cost: 16
-This is not an efficient solution
-*/
-
-#include<iostream>
-#include<vector>
+#include <bits/stdc++.h>
 using namespace std;
-
-#define V 5
-int parent[V];
-
-int find(int i){
-    while(parent[i] != i){
-        i = parent[i];
+struct Pair
+{
+    int u;
+    int v;
+    int wt;
+    Pair(int first, int second, int weight)
+    {
+        u = first;
+        v = second;
+        wt = weight;
     }
-    return i;
+};
+
+bool comp(Pair a, Pair b)
+{
+    return a.wt < b.wt;
 }
 
-void union1(int i, int j){
-    int a = find(i);
-    int b = find(j);
-    parent[a] = b;
+int findPar(int node, vector<int> &parent)
+{
+    if (node == parent[node])
+        return node;
+    return parent[node] = findPar(parent[node], parent);
 }
 
-void krushkals(int cost[][V]){
-    int minCost = 0;
-    // vector<int> parent(V, 0);
-    for(int i=0; i<V; i++)
+void unionn(int u, int v, vector<int> &parent, vector<int> &rank)
+{
+    u = findPar(u, parent);
+    v = findPar(v, parent);
+    if (rank[u] < rank[v])
+    {
+        parent[u] = v;
+    }
+    else if (rank[v] < rank[u])
+    {
+        parent[v] = u;
+    }
+    else
+    {
+        parent[v] = u;
+        rank[u]++;
+    }
+}
+
+int main()
+{
+    int N, m;
+    cin >> N >> m;
+    vector<Pair> edges;
+    for (int i = 0; i < m; i++)
+    {
+        int u, v, wt;
+        cin >> u >> v >> wt;
+        edges.push_back(Pair(u, v, wt));
+    }
+    sort(edges.begin(), edges.end(), comp);
+
+    vector<int> parent(N);
+    for (int i = 0; i < N; i++)
         parent[i] = i;
+    vector<int> rank(N, 0);
 
-    int edgeCount = 0;
-    while(edgeCount < V-1){
-        int min = 9999, a = -1, b = -1;
-        for(int i=0; i<V; i++){
-            for(int j=0; j<V; j++){
-                if(find(i) != find(j) && cost[i][j] < min){
-                    a = i;
-                    b = j;
-                    min = cost[i][j];
-                }
-            }
+    int cost = 0;
+    vector<pair<int, int> > mst;
+    for (auto it : edges)
+    {
+        if (findPar(it.v, parent) != findPar(it.u, parent))
+        {
+            cost += it.wt;
+            mst.push_back({it.u, it.v});
+            unionn(it.u, it.v, parent, rank);
         }
-
-        union1(a, b);
-        cout<<"Edge "<<edgeCount++<<": ("<<a<<", "<<b<<") "<<"Cost: "<<min<<endl;
-        minCost += min;
     }
-    cout<<"Minimum Cost: "<<minCost<<endl;
-}
-
-int main(){
-    // int V;
-    // cout<<"Enter the number of vertices: ";
-    // cin>>V;
-
-    int cost[][V] = {
-        { 9999, 2, 9999, 6, 9999 },
-        { 2, 9999, 3, 8, 5 },
-        { 9999, 3, 9999, 9999, 7 },
-        { 6, 8, 9999, 9999, 9 },
-        { 9999, 5, 7, 9, 9999 }
-    };
-
-    krushkals(cost);
-    return(0);
+    cout << cost << endl;
+    for (auto it : mst)
+        cout << it.first << " - " << it.second << endl;
+    return 0;
 }
