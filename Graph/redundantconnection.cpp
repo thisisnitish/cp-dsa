@@ -4,46 +4,55 @@ https://leetcode.com/problems/redundant-connection/
 */
 
 /*
-If you will reframe this question you will find that this question is all about detecting the
-cycle. Basically, we will construct a graph by adding edges one after the other. After each 
-addition of new edge we will do dfs traversal to check if any cycle is formed or not. If 
-there is a cycle then we know that the last edge addition to the graph led to the cycle 
-formation so, we will return that edge.
+This question might sound like detecting the cycle and return the edge. Well this is
+a correct approach but the question is how do you find an edge as per the question is
+asking.
+
+So, to tackle this, we can reverse our thinking approach. Construct the graph
+edge by edge and at the same time detect the cycle by running dfs for every edge.
+
+Inshort, Run DFS when you add a new edge in a graph to find whether that edge causes
+a cycle or not in a graph.
 */
 
 class Solution
 {
 public:
-    //Time: O(n^2), Space: O(n)
+    // Time: O(N^2), Space: O(N)
     vector<int> findRedundantConnection(vector<vector<int> > &edges)
     {
         int n = edges.size();
-        vector<vector<int> > graph(n + 1);
+        vector<int> adj[n + 1];
         vector<bool> visited(n + 1);
 
-        //construct the graph
+        // construct the graph
         for (auto edge : edges)
         {
             fill(visited.begin(), visited.end(), false);
-            graph[edge[0]].push_back(edge[1]), graph[edge[1]].push_back(edge[0]);
-            //detect the cycle using dfs
-            if (dfs(graph, visited, edge[0], -1))
+            adj[edge[0]].push_back(edge[1]);
+            adj[edge[1]].push_back(edge[0]);
+
+            // detect the cycle using dfs, everytime a new edge is added
+            if (dfs(adj, visited, edge[0], -1))
                 return edge;
         }
         return {};
     }
 
-    bool dfs(vector<vector<int> > &graph, vector<bool> &visited, int node, int parent)
+    bool dfs(vector<int> adj[], vector<bool> &visited, int node, int parent)
     {
-        if (visited[node])
-            return true; //already visited means cycle exists
         visited[node] = true;
 
-        for (auto adjacent : graph[node])
+        for (auto it : adj[node])
         {
-            if (adjacent != parent && dfs(graph, visited, adjacent, node))
+            if (!visited[it])
+            {
+                if (dfs(adj, visited, it, node))
+                    return true;
+            }
+            else if (it != parent)
                 return true;
         }
-        return false; //no cycle found
+        return false;
     }
 };
