@@ -11,18 +11,26 @@ https://leetcode.com/problems/linked-list-cycle/
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-//Hashing
-class Solution {
+
+/*
+The basic idea is check the node is present in the set or not if node is present
+then return true else put the node in set and if head becomes null or moves to the
+end then return false
+*/
+
+// Solution 1
+class Solution
+{
 public:
-    /*the basic idea is check the node is 
-    present in the set or not if node is present
-    then return true else put the node in set
-    Time: O(N), Space: O(N)*/
-    bool hasCycle(ListNode *head) {
-        unordered_set<ListNode*> s;
-        
-        while(head){
-            if(s.find(head) != s.end()){
+    // Time: O(N), Space: O(1)
+    bool hasCycle(ListNode *head)
+    {
+        unordered_set<ListNode *> s;
+
+        while (head)
+        {
+            if (s.count(head))
+            {
                 return true;
             }
             s.insert(head);
@@ -32,43 +40,16 @@ public:
     }
 };
 
-//Floyd's Tortoise and Hare Algorithm
+/*
+We can also use, tortoise and hare algorithm where tortoise takes 1 jump and hare
+takes 2 jumps and at some point of time both of them will point to a same node
+*/
+
+// Solution 2
 class Solution
 {
 public:
-    /*the basic idea is take two pointers
-    first move one position & second move two position
-    but at a time both will point to the same node then 
-    return true else return false
-    Time: O(N), Space: O(1)*/
-    bool hasCycle(ListNode *head)
-    {
-        if (head == NULL)
-            return false;
-
-        ListNode *hare, *tortoise;
-        tortoise = head;
-        hare = head->next;
-
-        while (hare != tortoise)
-        {
-            if (hare == NULL || hare->next == NULL)
-                return false;
-
-            tortoise = tortoise->next;
-            hare = hare->next->next;
-        }
-        return true;
-    }
-};
-
-class Solution
-{
-public:
-    /*the basic idea is take two pointers
-    first move one position & second move two position
-    but at a time both will point to the same node then 
-    return true else return false*/
+    // Time: O(N), Space: O(N)
     bool hasCycle(ListNode *head)
     {
         if (head == NULL)
