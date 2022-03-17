@@ -13,7 +13,7 @@ maximum profit.
 class Solution
 {
 public:
-    //Time: O(N), Space: O(N)
+    //Time: O(N), Space: O(1)
     int maxProfit(vector<int> &prices)
     {
         int maxProfit = 0;
