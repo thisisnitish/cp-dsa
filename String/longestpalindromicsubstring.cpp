@@ -3,9 +3,15 @@ Leetcode Question 5. Longest Palindromic Substring
 https://leetcode.com/problems/longest-palindromic-substring/
 */
 
+/*
+The first intuition is to solve this via Longest Common Substring, but unfortunately,
+this is not the right way of doing it.
+*/
+
 class Solution
 {
 public:
+    //Time: O(N^2)
     string longestPalindrome(string s)
     {
         int start = 0;
@@ -28,11 +34,12 @@ public:
         }
         return (s.substr(start, end - start + 1));
     }
-    
-    //util function to return the length afer comparing
+
+    // utility function to check whether the string is palindrome or not
+    // but it is expanding from the middle of the string
     int expandFromMiddle(string s, int left, int right)
     {
-        while (left >= 0 && right < s.length() && s.at(left) == s.at(right))
+        while (left >= 0 && right < s.length() && s[left] == s[right])
         {
             left--;
             right++;
