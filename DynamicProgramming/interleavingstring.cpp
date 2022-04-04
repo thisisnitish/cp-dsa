@@ -3,14 +3,18 @@ Leetcode Question 97. Interleaving String
 https://leetcode.com/problems/interleaving-string/
 */
 
-//Recursive
+// Sol 1 - https://www.youtube.com/watch?v=79g3LJoQk_U
+// Sol 2 - https://www.youtube.com/watch?v=3Rw3p9LrgvE
+
+
+// Recursive
 class Solution
 {
 public:
-    //Time: O(2^m+n), Space: O(m+n)
+    // Time: O(2^m+n), Space: O(m+n)
     bool checkInterleave(string s1, string s2, string s3, int i, int j)
     {
-        //base condition
+        // base condition
         if (i == s1.length() && j == s2.length())
             return true;
 
@@ -39,14 +43,14 @@ public:
     }
 };
 
-//Recursive + Memoization
+// Recursive + Memoization
 class Solution
 {
 public:
-    //Time: O(m*n), Space: O(m*n)
+    // Time: O(m*n), Space: O(m*n)
     bool checkInterleave(string s1, string s2, string s3, int i, int j, vector<vector<int> > &memo)
     {
-        //base condition
+        // base condition
         if (i == s1.length() && j == s2.length())
             return true;
 
@@ -81,11 +85,11 @@ public:
     }
 };
 
-//Bottom Up, Tabulation
+// Bottom Up, Tabulation
 class Solution
 {
 public:
-    //Time: O(m*n), Space: O(m*n)
+    // Time: O(m*n), Space: O(m*n)
     bool isInterleave(string s1, string s2, string s3)
     {
         int m = s1.length(), n = s2.length();
@@ -93,43 +97,39 @@ public:
         if (m + n != s3.length())
             return false;
 
-        vector<vector<int> > dp(m + 1, vector<int>(n + 1, 0));
+        vector<vector<bool> > dp(m + 1, vector<bool>(n + 1, 0));
 
         for (int i = 0; i < m + 1; i++)
         {
             for (int j = 0; j < n + 1; j++)
             {
-                //for the first value, because s1 and s2 are empty and you can create s3
+                // for the first cell, because s1 and s2 both are empty and
+                // you can create s3 i.e. ""
                 if (i == 0 && j == 0)
-                    dp[i][j] = 1;
+                    dp[i][j] = true;
                 else if (i == 0)
                 {
-                    //filling the first row
-                    dp[i][j] = s2[j - 1] == s3[i + j - 1] ? dp[i][j - 1] : 0;
+                    // handle the first row separately where s1 will be empty and
+                    // s2 will not be empty
+                    dp[i][j] = s2[j - 1] == s3[i + j - 1] ? dp[i][j - 1] : false;
                 }
                 else if (j == 0)
                 {
-                    //filling the second row
-                    dp[i][j] = s1[i - 1] == s3[i + j - 1] ? dp[i - 1][j] : 0;
+                    // handle the first column separately where s2 will be empty and
+                    // s1 will not be empty
+                    dp[i][j] = s1[i - 1] == s3[i + j - 1] ? dp[i - 1][j] : false;
                 }
                 else
                 {
-                    /*
-                    if the last character from s1 == last character from s3
-                    */
+                    // if the last character from s1 == last character from s3
                     if (s1[i - 1] == s3[i + j - 1])
                         dp[i][j] = dp[i - 1][j];
-                    /*
-                        if the last character from s2 == last character from s3
-                    */
+
+                    /*if the last character from s2 == last character from s3
+                    this will only happen when char from s1 will not be equal to
+                    char from s3*/
                     if (!dp[i][j] && s2[j - 1] == s3[i + j - 1])
                         dp[i][j] = dp[i][j - 1];
-                    /*
-                    for the 3rd case, we don't need to check, i.e.
-                    if the last character from s1 == last character from s3 and
-                    last character from s2 == last character from s3, if one of
-                    above condition will true then this condition will fullfill
-                    */
                 }
             }
         }
