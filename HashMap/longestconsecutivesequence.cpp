@@ -3,11 +3,11 @@ Leetcode Question 128. Longest Consecutive Sequence
 https://leetcode.com/problems/longest-consecutive-sequence/
 */
 
-//Solution 1
+// Solution 1
 class Solution
 {
 public:
-    //Time: O(nlogn) Space: O(1)
+    // Time: O(nlogn) Space: O(N)
     int longestConsecutive(vector<int> &nums)
     {
         if (nums.size() == 0)
@@ -20,13 +20,15 @@ public:
 
         for (int i = 1; i < nums.size(); i++)
         {
+            // we are skipping the duplicate values
             if (nums[i - 1] != nums[i])
             {
                 if (nums[i - 1] + 1 == nums[i])
                     lengthSoFar++;
                 else
                 {
-                    maxLengthOfConsecutiveSeq = max(maxLengthOfConsecutiveSeq, lengthSoFar);
+                    maxLengthOfConsecutiveSeq = max(maxLengthOfConsecutiveSeq,
+                                                    lengthSoFar);
                     lengthSoFar = 1;
                 }
             }
@@ -35,11 +37,10 @@ public:
     }
 };
 
-//Solution 2
 class Solution
 {
 public:
-    //Time: O(n) Space: O(1)
+    // Time: O(n) Space: O(1)
     int longestConsecutive(vector<int> &nums)
     {
         if (nums.size() == 0)
@@ -54,7 +55,7 @@ public:
         for (auto item : s)
         {
             if (s.count(item - 1))
-                continue; //if you found the element skip it
+                continue; // if you found the element skip it
 
             int lengthSoFar = 1;
             while (s.count(item + lengthSoFar))
