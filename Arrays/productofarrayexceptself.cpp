@@ -27,39 +27,31 @@ public:
 class Solution
 {
 public:
-    // Time: O(N), Space: O(1)
+    // Time: O(N), Space: O(N)
     vector<int> productExceptSelf(vector<int> &nums)
     {
-        vector<int> ans;
-        int totalProduct = 1, zeroCount = 0;
+        int n = nums.size();
+        vector<int> left(n, 1);
+        vector<int> right(n, 1);
 
-        // finding the total product and counting zeros
-        for (auto n : nums)
+        // for left: left[i] = left[i-1] * nums[i-1]
+        for (int i = 1; i < n; i++)
         {
-            if (n == 0)
-                zeroCount++;
-            else
-                totalProduct = totalProduct * n;
+            left[i] = left[i - 1] * nums[i - 1];
         }
 
-        for (auto n : nums)
+        // for right: right[i] = right[i+1] * nums[i+1]
+        for (int i = n - 2; i >= 0; i--)
         {
-            if (n == 0)
-            {
-                if (zeroCount != 1)
-                    ans.push_back(0);
-                else
-                    ans.push_back(totalProduct);
-            }
-            else
-            {
-                if (zeroCount == 0)
-                    ans.push_back(totalProduct / n);
-                else
-                    ans.push_back(0);
-            }
+            right[i] = right[i + 1] * nums[i + 1];
         }
-        return ans;
+
+        // now multiply both array elements
+        for (int i = 0; i < n; i++)
+        {
+            nums[i] = left[i] * right[i];
+        }
+        return nums;
     }
 };
 
@@ -70,21 +62,21 @@ public:
     // Time: O(N), Space: O(1)
     vector<int> productExceptSelf(vector<int> &nums)
     {
-        vector<int> ans(nums.size());
-        int temp = 1;
+        int n = nums.size();
+        vector<int> result(n, 1);
 
-        for (int i = 0; i < nums.size(); i++)
+        for (int i = 1; i < n; i++)
         {
-            ans[i] = temp;
-            temp = temp * nums[i];
+            result[i] = result[i - 1] * nums[i - 1];
         }
 
-        temp = 1;
-        for (int i = nums.size() - 1; i >= 0; i--)
+        int product = nums[n - 1];
+        for (int i = n - 2; i >= 0; i--)
         {
-            ans[i] = ans[i] * temp;
-            temp = temp * nums[i];
+            result[i] = result[i] * product;
+            product = product * nums[i];
         }
-        return ans;
+
+        return result;
     }
 };
