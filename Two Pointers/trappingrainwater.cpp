@@ -3,6 +3,8 @@ Leetcode Question 42. Trapping Rain Water
 https://leetcode.com/problems/trapping-rain-water/
 */
 
+//  Leetcode Solution is really nice. Please refer, if you have any problem
+
 // Solution 1
 class Solution
 {
@@ -63,12 +65,45 @@ public:
             rightMax[i] = max(rightMax[i + 1], height[i]);
         }
 
+        // water cannot be stored at boundaries
         int trappedWater = 0;
-        for (int i = 0; i < n; i++)
+        for (int i = 1; i < n - 1; i++)
         {
             trappedWater += min(rightMax[i], leftMax[i]) - height[i];
         }
+        return trappedWater;
+    }
+};
 
+// Two Pointers
+class Solution
+{
+public:
+    // Time: O(N), Space: O(1)
+    int trap(vector<int> &height)
+    {
+        int n = height.size();
+        if (n == 0)
+            return 0;
+
+        int trappedWater = 0, left = 0, right = n - 1;
+        int leftMax = height[left], rightMax = height[right];
+
+        while (left < right)
+        {
+            if (leftMax < rightMax)
+            {
+                left++;
+                leftMax = max(leftMax, height[left]);
+                trappedWater += leftMax - height[left];
+            }
+            else
+            {
+                right--;
+                rightMax = max(rightMax, height[right]);
+                trappedWater += rightMax - height[right];
+            }
+        }
         return trappedWater;
     }
 };
