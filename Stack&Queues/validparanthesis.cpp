@@ -6,16 +6,17 @@ https://leetcode.com/problems/valid-parentheses/
 //The basic idea plzz read the infix to postfix conversion application from stack
 //then this question is a piece of cake for you
 
+// I was able to solve this in 15 mins, 26 sec.
 class Solution
 {
 public:
-    /*Time: O(N), Space: O(N)*/
+    // Time: O(N), Space: O(N)
     bool isValid(string s)
     {
 
-        if (s.length() == 0)
+        if (s.size() == 0)
             return true;
-        if (s.length() == 1)
+        if (s.size() == 1)
             return false;
 
         stack<char> st;
@@ -42,9 +43,6 @@ public:
 
         if (st.empty())
             return true;
-        else
-        {
-            return false;
-        }
+        return false;
     }
 };
