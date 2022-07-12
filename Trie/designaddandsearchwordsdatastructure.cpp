@@ -5,8 +5,20 @@ https://leetcode.com/problems/design-add-and-search-words-data-structure/
 
 /*
 No need to write the generic functions in the data structure that we do usually. It
-will give TLE, so to simulate the functionality (insert, get, setEnd) we will be
-using the links[] array itself.
+will give TLE, so to simulate the functionality (insert, get, setEnd, isEnd) we will
+be using the links[] array itself.
+
+There is a very interesting thing you will notice, `addWord` functon is fine. You
+will get certain words and you have to insert it as we do in generic implementation
+of Trie.
+
+But in `search` function, it is said that it will return `true` if there is any
+string in data structure that matches `word` or `false` otherwise.
+
+Now, the interesting part, it is said that, `word` may contains dots `'.'` and these
+dots can be matched with any letter. This basically means we have 26 possibilities
+from `a to z`. So, this case we have to handle. Otherwise, the entire search
+function is same as we do in generic implementation of Trie.
 */
 struct Node
 {
@@ -30,6 +42,8 @@ public:
         Node *node = root;
         for (int i = 0; i < word.size(); i++)
         {
+
+            // If word[i] doesn't exists then insert it
             if (node->links[word[i] - 'a'] == NULL)
             {
                 node->links[word[i] - 'a'] = new Node();
@@ -45,6 +59,9 @@ public:
     {
         for (int i = 0; i < word.size(); i++)
         {
+
+            // if word[i] is '.' then we have 26 possibilities
+            // So we have to consider every possibility
             if (word[i] == '.')
             {
                 for (char c = 'a'; c <= 'z'; c++)
@@ -65,9 +82,9 @@ public:
             }
         }
 
-        if (node->isEnd)
-            return true;
-        return false;
+        // if(node->isEnd) return true;
+        // return false;
+        return node->isEnd;
     }
 
     bool search(string word)
