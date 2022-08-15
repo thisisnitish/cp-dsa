@@ -3,60 +3,34 @@ Leetcode Question 33. Search in Rotated Sorted Array
 https://leetcode.com/problems/search-in-rotated-sorted-array/
 */
 
-class Solution
-{
+/*
+See, if the array is rotated, we need to think that one side of the array will be 
+sorted. So, everytime the bounds are changing, we are checking that which side is
+sorted and based on that we are moving.
+*/
+
+class Solution {
 public:
-    int search(vector<int> &nums, int target)
-    {
-        //first find the boundary according to the target then do regular binary search
-        int length = nums.size();
-
-        if (length == 0)
-            return -1;
-
-        int left = 0;
-        int right = length - 1;
-
-        //finding the pivot position
-        while (left < right)
-        {
-            int mid = left + (right - left) / 2;
-
-            if (nums[mid] > nums[right])
-            {
-                left = mid + 1;
+    // Time: O(logN), Space: O(1)
+    int search(vector<int>& nums, int target) {
+        int low = 0, high = nums.size()-1;
+        
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            
+            // if we get the element
+            if(nums[mid] == target) return mid;
+            
+            // if left side is rotated
+            if(nums[low] <= nums[mid]){
+                if(target >= nums[low] && target <= nums[mid]) high = mid-1;
+                else low = mid+1;
             }
-            else
-            {
-                right = mid;
+            // if the right side is rotated i.e. nums[mid] <= nums[high]
+            else{
+                if(target >= nums[mid] && target <= nums[high]) low = mid+1;
+                else high = mid-1;
             }
-        }
-
-        int start = left;
-        left = 0;
-        right = length - 1;
-
-        //we got the perfect boundary for searching that element
-        if (target >= nums[start] && target <= nums[right])
-        {
-            left = start;
-        }
-        else
-            right = start;
-
-        //regular binary search in the bounds
-        while (left <= right)
-        {
-            int mid = left + (right - left) / 2;
-
-            if (nums[mid] == target)
-            {
-                return mid;
-            }
-            else if (nums[mid] < target)
-                left = mid + 1;
-            else
-                right = mid - 1;
         }
         return -1;
     }
