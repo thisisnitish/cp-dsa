@@ -76,6 +76,6 @@ Everyone is welcome to contribute. We gladly accept patches, pull requests, bug 
 Just Fork the repo and clone it and start coding.
 
 
-### Follow me on Twitter: [@thisisnitish30](https://twitter.com/thisisnitish30)
+### Let's connect on Twitter: [@thisisnitish30](https://twitter.com/thisisnitish30)
 
 **Happy Coding**
