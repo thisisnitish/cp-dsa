@@ -78,4 +78,4 @@ Just Fork the repo and clone it and start coding.
 
 ### Follow me on Twitter: [@thisisnitish30](https://twitter.com/thisisnitish30)
 
-## Happy Coding
+**Happy Coding**
